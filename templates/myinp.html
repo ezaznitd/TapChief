@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
+    	<script type=text/javascript> $(function() { $("#clear_button").click(function (event) { $.getJSON('/clear_Function', { }, function(data) { }); return false; }); }); </script>
+    	<script type=text/javascript> $(function() { $("#index_button").click(function (event) { $.getJSON('/index_Function', { }, function(data) { }); return false; }); }); </script>
+    	
+		<title>my form</title>
+		<style>
+			form
+			{
+    			width: 300px;
+    			margin: 0 auto;
+			}
+			.form-data{
+  				background: #ffffff;
+  				padding: 10px 20px;
+  				border: 1px solid #dddddd;
+  				border-radius: 3px;
+ 			 	margin-bottom: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<form name="myDocument" action="." method="post" class="form-data">
+        	<input align="center" type = "button" id = "clear_button" value = "Clear"/><br><br>
+        	<input type = "button" id = "index_button" value = "Index"/>
+        </form>
+        <form action="{{ url_for('addRegion') }}" method="post" class="form-data">
+        	<label>Enter the word to search</label>  
+    		<input type="text" name="projectFilePath"><br><br>
+    	<input type="submit" value="Submit">
+</form>
+	</body>
+</html>
