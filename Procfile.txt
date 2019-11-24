@@ -1,1 +1,1 @@
-web: gunicorn TapChief:app
+web gunicorn TapChief:app
