@@ -58,7 +58,7 @@ def index_Function():
         if(content[i] == '\n'):
             cnt += 1
         else:
-            if(cnt == 4):
+            if(cnt == 2):
                 unique_id.append(random.randrange(100000, 500000))
                 paragraph[unique_id[index]] = s
                 index += 1
@@ -115,6 +115,8 @@ def generate_results():
             result.append(paragraph[unique_id[i]])
         # print(s_list)
         # result.append(str(list[i]))
+    if(result == []):
+        result.append("Your search word is not presend in the document")
     return render_template("search_results.html", result=result)
             
 if __name__ == '__main__':
