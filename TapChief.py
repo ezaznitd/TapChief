@@ -6,8 +6,8 @@ app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
 wordSearched = ""
 content = ""
-dict = {}
-list = []
+paragraph = {}
+unique_id = []
 
 
 @app.route("/about")
@@ -40,17 +40,17 @@ def index_clear_search():
 
 @app.route('/clear_Function')
 def clear_Function():
-    global list
-    global dict
-    list = []
-    dict = {}
+    global unique_id
+    global paragraph
+    unique_id = []
+    paragraph = {}
     print('You have cleared all the index')
     return ""
 
 @app.route('/index_Function')
 def index_Function():
-    global dict
-    global list
+    global paragraph
+    global unique_id
     index = 0
     cnt = 0
     s = ""
@@ -59,14 +59,14 @@ def index_Function():
             cnt += 1
         else:
             if(cnt == 4):
-                list.append(random.randrange(100000, 500000))
-                dict[list[index]] = s
+                unique_id.append(random.randrange(100000, 500000))
+                paragraph[unique_id[index]] = s
                 index += 1
                 s = ""
             s += content[i]
             cnt = 0
-    list.append(random.randrange(100000, 500000))
-    dict[list[index]] = s
+    unique_id.append(random.randrange(100000, 500000))
+    paragraph[unique_id[index]] = s
     print(content)
     return ""
 
@@ -97,10 +97,10 @@ def generate_results():
     w = wordSearched.lower()
     result = []
     is_present = False
-    if(len(list) == 0):
+    if(len(unique_id) == 0):
         result.append("You haven't index the Paragraphs")
-    for i in range(len(list)):
-        s = dict[list[i]]
+    for i in range(len(unique_id)):
+        s = paragraph[unique_id[i]]
         s = s.lower()
         s_list = s.split(' ')
         cnt = 0
@@ -110,9 +110,9 @@ def generate_results():
                 break
         if(is_present):
             ch = "Paragraph Id "
-            ch = ch + str(list[i]) + '\n'
+            ch = ch + str(unique_id[i]) + '\n'
             result .append(ch)
-            result.append(dict[list[i]])
+            result.append(paragraph[unique_id[i]])
         # print(s_list)
         # result.append(str(list[i]))
     return render_template("search_results.html", result=result)
